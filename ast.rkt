@@ -5,6 +5,10 @@
 ;; | add1 Expr
 ;; | sub1 Expr
 ;; | if (zero? ,Expr) Expr Expr
+
+;; TODO: Add other forms of expression to the comment above
+
+(struct int-e (i) #:transparent)
 (struct add1-e (e) #:transparent)
 (struct sub1-e (e) #:transparent)
 (struct if-e (i t f) #:transparent)

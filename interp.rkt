@@ -16,6 +16,4 @@
          (interp f))]
 
     ;; TODO
-    #;...
-    [(cond-e (cons (clause i b) cs) f)
-      (interp (if-e i b (cond-e cs f)))]))
+    #;...))

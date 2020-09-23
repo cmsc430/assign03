@@ -12,11 +12,12 @@
         (asm-display (compile p))))))
 
 (define (read-program)
-  ;; remove this when your parser is complete:
+  ;; remove this when your parser is complete: (delete until next comment)
   (begin
     (read-line)
     (let ((e (read)))
       (unless (expr? e) (error "syntax error"))
-      e))
-  #; ;; use this when your parser is complete:
+      (sexpr->ast e)))
+  ;; use this when your parser is complete: (remove this line and the line below)
+  #;
   (parse (lex-port (current-input-port))))

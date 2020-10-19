@@ -8,7 +8,8 @@
 (define (main fn)
   (with-input-from-file fn
     (λ ()
-        (let ((_ (read-line))
-              (p (read)))
-          (unless (expr? p) (error "syntax error" p))
-          (writeln (interp (sexpr->ast p)))))))
+        (let ((p (read-program)))
+          (interp p)))))
+
+(define (read-program)
+  (parse (lex-port (current-input-port))))

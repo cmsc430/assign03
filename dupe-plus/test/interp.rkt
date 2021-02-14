@@ -1,8 +1,8 @@
 #lang racket
-(require "../compile.rkt" "../asm/interp.rkt" "../syntax.rkt" rackunit)
+(require "../interp.rkt" a86/interp "../parse.rkt" rackunit)
 
 (define (run e)
-  (asm-interp (compile (sexpr->ast e))))
+  (interp (parse e)))
 
 ;; Abscond examples
 (check-equal? (run 7) 7)
@@ -36,3 +36,18 @@
 (check-equal? (run '(cond [(zero? 0) 2] [else 3])) 2)
 (check-equal? (run '(cond [(zero? 1) 2] [(zero? (sub1 1)) 4] [else 3])) 4)
 
+;; Dupe examples
+(check-equal? (run #t) #t)
+(check-equal? (run #f) #f)
+(check-equal? (run '(if (zero? 0)
+                        (if (zero? 1) #t #f)
+                        7))
+              #f)
+
+;; Dupe+ exampels
+(check-equal? (run '(not #t)) #f)
+(check-equal? (run '(not #f)) #t)
+(check-equal? (run '(cond [else #t])) #t)
+(check-equal? (run '(cond [(not #t) 2] [else 3])) 3)
+(check-equal? (run '(cond [(if #t #t #f) 2] [else 3])) 2)
+(check-equal? (run '(cond [(zero? 1) 2] [(if (not (zero? (sub1 2))) #t #f) 4] [else 3])) 4)

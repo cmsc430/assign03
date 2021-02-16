@@ -16,8 +16,6 @@
     [(Prim1 p e)       (compile-prim p e)]
     [(If e1 e2 e3)     (compile-if e1 e2 e3)]
     ;; TODO: Handle conditionals
-    ;; SOLN
-    [(Cond cs e)       (compile-cond cs e)]
     ))
 
 
@@ -36,20 +34,6 @@
          ['add1 (Add 'rax (value->bits 1))]
          ['sub1 (Sub 'rax (value->bits 1))]
          ;; TODO: Handle abs, -, and not
-         ;; SOLN
-         ['abs  (let ((l (gensym 'abs)))
-                  (list (Cmp 'rax 0)
-                        (Jg l)
-                        (Mov 'rbx 0)
-                        (Sub 'rbx 'rax)
-                        (Mov 'rax 'rbx)
-                        (Label l)))]
-         ;; SOLN
-         ['-    (list (Mov 'rbx 0)
-                      (Sub 'rbx 'rax)
-                      (Mov 'rax 'rbx))]
-         ;; SOLN
-         ['not  (Xor 'rax 2)]
          ['zero?
           (let ((l1 (gensym 'nzero)))
             (seq (Cmp 'rax 0)
@@ -71,8 +55,3 @@
          (compile-e e3)
          (Label l2))))
 
-;; SOLN
-(define (compile-cond cs e)
-  (match cs
-    ['() (compile-e e)]
-    [(cons (Clause p b) cs) (compile-e (If p b (Cond cs e)))]))

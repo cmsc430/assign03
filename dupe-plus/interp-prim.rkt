@@ -8,10 +8,4 @@
     ['sub1  (sub1 v)]
     ['zero? (zero? v)]
     ;; TODO: Handle abs, -, and not
-    ;; SOLN
-    ['abs (abs v)]
-    ;; SOLN
-    ['- (- v)]
-    ;; SOLN
-    ['not (not v)]
     ))

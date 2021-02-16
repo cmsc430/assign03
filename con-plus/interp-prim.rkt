@@ -7,9 +7,5 @@
     ['add1 (add1 i)]
     ['sub1 (sub1 i)]
     ;; TODO: Handle abs and -
-    ;; SOLN
-    ['abs (abs i)]
-    ;; SOLN
-    ['- (- i)]
     ))
 

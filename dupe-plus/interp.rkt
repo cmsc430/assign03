@@ -18,9 +18,4 @@
          (interp e2)
          (interp e3))]
     ;; TODO: Handle conditionals
-    ;; SOLN
-    [(Cond '() e) (interp e)]
-    ;; SOLN
-    [(Cond (cons (Clause p b) cs) e)
-     (interp (If p b (Cond cs e)))]
     ))
